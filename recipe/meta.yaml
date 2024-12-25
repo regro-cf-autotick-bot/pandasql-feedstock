@@ -11,20 +11,22 @@ source:
 
 build:
   noarch: python
-  number: 0
+  number: 1
   script: "{{ PYTHON }} -m pip install . -vv"
 
 requirements:
   host:
     - pip
-    - python >=3.6
+    - python {{ python_min }}
   run:
     - numpy
     - pandas
-    - python >=3.6
+    - python >={{ python_min }}
     - sqlalchemy
 
 test:
+  requires:
+    - python {{ python_min }}
   imports:
     - pandasql
     - pandasql.tests
